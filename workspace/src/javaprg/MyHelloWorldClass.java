@@ -1,3 +1,7 @@
-void main() {
-    System.out.println("Hi RSl, I am Shraddha Kolhapure!");
+public class MyHelloWorldClass{
+    public static void main(String[] args)
+    {
+        System.out.println("Hello RSL, I am Shraddha");
+    }
+
 }
