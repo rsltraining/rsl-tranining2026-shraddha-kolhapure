@@ -1,0 +1,186 @@
+﻿Q1.Read about static and class keywords used for defining functions in Swift. Explain the difference between them.
+
+
+
+
+Static function cannot be overridden by subclass but class function can be overridden .
+Class function is mostly used when we want to perform inheritance and want child class can change behaviour of parent class method
+
+
+Eg:
+
+
+ Class Employee{
+class func companyPolicy()
+{
+print(“Follow office time”)
+} }
+Class Developer:Employee
+{
+Override class func companyPolicy()
+{
+print(“developer can work flexible hours) 
+} }  
+
+
+Here the developer class overriding the parent class but if we use static function it will show error as static function cannot be overridden.
+
+
+
+
+Q2.Create an enum named “Menu” which has the following items:
+a. Burger with number of patties as its associated value default value will be 1
+b. Fries along with its “Size” as an associated value. “Size” is also an enum having values “Small”, “Medium” and “Large”
+c. Meal
+d. Coke
+Create an array of Enum “Menu” which will have items ordered by a customer. Write a function which will take this array as an input and print the items along with its associated values that were ordered. If the ordered item contains “Meal” then print “Coke” as well.
+Eg:
+orderedItems = [Meal. Fries(Large), Burger()]
+// Print:
+Meal
+Coke
+Large fries
+Burger with 1 patties
+
+
+
+
+enum size{
+case Small
+case Medium
+case Large
+}
+enum Menu{
+        case Burger(Int)
+        case Fries(size)
+        case Meal
+        case Coke
+}
+
+
+func OrderDetails(items : [Menu]){
+    
+    for i in items{
+        switch i{
+        
+        case .Meal: print("Meal")
+                    print("coke")
+        case .Coke: print("Coke")
+        case .Burger(let quantity)  : print("Burger with \(quantity) patties")
+        case .Fries(let size):
+            switch size{
+                case .Small: print("Small fries")
+                case .Medium : print("Medium fries")
+                case .Large : print("Large fries")
+                            }
+             }
+    }
+}
+
+
+let s: [Menu]=[.Meal, .Fries(.Small), .Burger(5), .Coke]
+OrderDetails(items:s)
+
+
+
+
+Q3.Create a structure “Person” having below properties:
+a. First Name
+b. LastName
+c. Middle Name
+d. Age
+Write appropriate initialisers, also create an extension for the above struct having a property “full Name” which will give a person's full name (first name + middle name + last name).
+
+
+
+
+struct Person{
+var FirstName: String
+var LastName : String
+var MiddleName : String
+var Age : Int
+
+
+init(FirstName: String , LastName : String , MiddleName : String , Age: Int)
+{
+self.FirstName = FirstName
+self.LastName = LastName
+self.MiddleName = MiddleName
+self.Age = Age
+}
+}
+
+
+extension Person{
+var FullName : String{
+        FirstName + " " +  MiddleName + " " + LastName
+}
+}
+
+
+var p=Person(FirstName: "Shraddha" , LastName : "Kolhapure" , MiddleName : "Laxmikant" , Age: 21)
+print(p.FullName)
+
+
+
+
+
+
+Q4.Create a structure named “Stack” it has a variable (array of integers).
+a. Create a function “push” which will take an integer as an input . This function will add the input in the beginning of the array
+b. Create a function “pop” which will return and delete the first element of the array and will return nil in case no element in the array are present Try this and see what happens. In case of any issue find out why the issue is occurring and how you can resolve the issue.
+
+
+
+
+struct Stack{
+var a:[Int]=[]
+func pushitem( _ input : Int ){
+        a.insert(input , at : 0)
+}
+
+
+func PrintArray()
+{
+    for i in a{print(i)}
+}
+
+
+func popitem(){
+     if a.count == 0 {return }
+    else
+    {
+    a.remove(at : 0)
+    }} }
+
+
+
+
+The problem is here function is written inside struct so struct will going to change which causing error so solution for this is using mutating keyword by marking function as mutating here is correct solution
+
+
+struct Stack{
+var a:[Int]=[]
+mutating func pushitem( _ input : Int ){
+        a.insert(input , at : 0)
+}
+
+
+func PrintArray()
+{
+    for i in a{print(i)}
+}
+mutating func popitem(){
+        if a.count == 0 {return }
+    else
+    {
+    a.remove(at : 0)
+    }} }
+
+
+var s=Stack()
+s.pushitem(10)
+s.pushitem(15)
+s.pushitem(20)
+s.popitem()
+s.PrintArray() //output will get 10 15
