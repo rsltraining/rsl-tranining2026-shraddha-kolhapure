@@ -1,0 +1,417 @@
+﻿Q1.Implement the following functions in Objective-C: Note: although the word function is being used, these are not to be confused with C functions but are required to be Obj-C methods. Also, even though the words array, dictionary string and integer are used, these mean NSArray, NSDictionary, NSString (or their mutable versions- it is upto you to decide whether to use mutable version or not) and NSInteger, NSNumber and so on. 
+
+
+ a. A function that takes two integers as input and returns the sum of the two numbers.
+
+
+#import <Foundation/Foundation.h>
+
+
+@interface AdditionOfNum : NSObject
+
+
+- (NSInteger)addNumber:(NSInteger)n1
+          secondNumber:(NSInteger)n2;
+
+
+@end
+
+
+@implementation AdditionOfNum
+
+
+- (NSInteger)addNumber:(NSInteger)n1
+          secondNumber:(NSInteger)n2 {
+
+
+    return n1 + n2;
+}
+
+
+@end
+
+
+int main() {
+        AdditionOfNum *s = [[AdditionOfNum alloc] init];
+
+
+        NSInteger result =
+        [s addNumber:10 secondNumber:20];
+
+
+        NSLog(@"Sum = %ld", (long)result);
+
+
+    return 0;
+}
+
+
+
+
+
+
+ b. Write a function that takes an array of integers and returns the sum of all the even numbers.
+
+
+#import <Foundation/Foundation.h>
+@interface EvenSum : NSObject
+
+
+- (NSInteger)calEvenSum:(NSArray *)a;
+@end
+
+
+@implementation EvenSum
+- (NSInteger)calEvenSum:(NSArray *)a {
+    NSInteger sum = 0;
+    for (NSNumber *num in a) {
+        if ([num intValue] % 2 == 0) {
+        sum = sum + [num intValue];
+        }  }
+    return sum;
+}
+
+
+@end
+int main() {
+      EvenSum *s =  [[EvenSum alloc] init];
+        NSArray *a = [NSArray arrayWithObjects:
+                     [NSNumber numberWithInt:10],
+                     [NSNumber numberWithInt:15],
+                     [NSNumber numberWithInt:20],
+                     [NSNumber numberWithInt:7],
+                     [NSNumber numberWithInt:8], 
+                     Nil]; 
+       NSInteger res = [s calEvenSum:a];
+      NSLog(@"Even Sum = %ld", (long)res);
+
+
+    return 0;
+}
+
+
+ c. Write a function that prints numbers from 1 to 100 but prints “Hello” if the number is divisible by 3, “World” if the number is divisible by 5, “Hello World” if the number is divisible by both 3 & 5. Use the switch case inside a for loop. 
+
+
+
+
+#import <Foundation/Foundation.h>
+@interface PrintMsg : NSObject
+- (void) printingMsg;
+@end
+
+
+@implementation PrintMsg
+- (void)printingMsg {
+    NSInteger i;
+    
+    for (i = 1; i <= 100; i++) {
+       int val = (i % 3 == 0 ? 2 : 0) + (i % 5 == 0 ? 1 : 0);
+
+
+       switch (val) {
+            case 2:
+                NSLog(@"Hello");
+                break;
+                
+            case 1:
+                NSLog(@"World");
+                break;
+                
+            case 3:
+                NSLog(@"Hello World");
+                break;
+                
+            default:
+                NSLog(@"%ld", (long)i);
+                break;
+        }   } }
+
+
+@end
+int main() {
+        PrintMsg *s = [[PrintMsg alloc] init];
+        [s printingMsg];
+    
+    return 0;
+}
+
+
+
+
+ d. Function that takes two arrays of numbers and returns an array formed by alternatively merging elements from the first array and elements from the second array. e.g: input arrays [10,50,70,42], [78, 90] => return array: [10,78, 50, 90, 70, 42]. Note: you should not modify the input arrays in any way
+
+
+#import <Foundation/Foundation.h>
+@interface CombineArrays : NSObject
+- (NSArray *)mergearr:(NSArray *)a1 with:(NSArray *)a2;
+@end
+@implementation CombineArrays
+- (NSArray *)mergearr:(NSArray *)a1 with:(NSArray *)a2 {
+
+
+   NSMutableArray *res = [[NSMutableArray alloc] init];
+   NSInteger i = 0;
+    while (i < [a1 count] || i < [a2 count]) {
+        if (i < [a1 count]) {
+          [res addObject:[a1 objectAtIndex:i]];
+        }
+        if (i < [a2 count]) {
+          [res addObject:[a2 objectAtIndex:i]];
+        }
+        i++;
+    }
+    return res;
+}
+@end
+int main() {
+        CombineArrays *obj = [[CombineArrays alloc] init];
+        NSArray *a1 = [NSArray arrayWithObjects:
+                       [NSNumber numberWithInt:10],
+                       [NSNumber numberWithInt:50],
+                       [NSNumber numberWithInt:70],
+                       [NSNumber numberWithInt:42], nil];
+
+
+        NSArray *a2 = [NSArray arrayWithObjects:
+                       [NSNumber numberWithInt:78],
+                       [NSNumber numberWithInt:90], nil];
+        NSArray *result = [obj mergearr:a1 with:a2];
+        NSLog(@"Merged Array : %@", result);
+    }
+    return 0;
+}
+
+
+
+
+ e. Function that takes an array of numbers and returns an array same as the input array but without any duplicates in it. e.g: input array [10,20,30,10,20,30] => return array: [10, 20, 30]. Note: you should not modify the input array in any way
+
+
+#import <Foundation/Foundation.h>
+
+
+@interface UniquElement : NSObject
+- (NSArray *)Given:(NSArray *)data;
+@end
+
+
+@implementation UniquElement
+
+
+- (NSArray *)Given:(NSArray *)data {
+    NSOrderedSet *set = [NSOrderedSet orderedSetWithArray:data];
+    return [set array];
+}
+@end
+int main() {
+      UniquElement *s = [[UniquElement alloc] init];
+        NSArray *a = [NSArray arrayWithObjects:
+                     [NSNumber numberWithInt:10],
+                     [NSNumber numberWithInt:20],
+                     [NSNumber numberWithInt:30],
+                     [NSNumber numberWithInt:10],
+                     [NSNumber numberWithInt:20],
+                     [NSNumber numberWithInt:30], nil];
+
+
+        NSArray *res = [s Given:a];
+        NSLog(@"Unique Result: %@", res);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ f. Fn that takes an array of characters and shifts the elements in the array in a circular fashion. e.g: input array: [“a”, “b”, “c”, “d”], modify this array to be [“d”,“a”, “b”, “c” ]. Another example. if the input array is now: [“d”,“a”, “b”, “c” ], modify this to be as follows: [“c”, “d”, “a”, “b”]. 
+
+
+#import <Foundation/Foundation.h>
+
+
+@interface MoveElement : NSObject
+- (void)shiftarray:(NSMutableArray *)p;
+@end
+
+
+@implementation MoveElement
+
+
+- (void)shiftarray:(NSMutableArray *)p {
+    NSInteger n;
+    id t;
+    n = [p count];
+    if (n > 1) {
+        t = [p objectAtIndex:n - 1];
+        [p removeObjectAtIndex:n - 1];
+        [p insertObject:t atIndex:0];
+    }  }
+
+
+@end
+
+
+int main() {
+    
+        MoveElement *obj = [[MoveElement alloc] init];
+        NSMutableArray *v;
+        v = [NSMutableArray arrayWithObjects:@"a", @"b", @"c", @"d", nil];
+        [obj shiftarray:v];
+        NSLog(@"Res: %@", v);
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ g. Write a function that takes a string and returns a dictionary that contains the count for each character in the string. (“abbcccdddd”-> {a: 1, b: 2, c: 3, d: 4}). Iterate over this dictionary and print for every character: “Character appears times in the string”.
+ h. Function that takes two dictionaries as inputs and merges them and returns the merged dictionary. If there are duplicate keys then the key value from the first dictionary is preferred e.g: input dictionaries {a: 1, b:2, c:3 }, {d: 4, e: 5, b: 88}, return dictionary: {a:1, b:2, c:3, d: 4, b: 5}. Assume that all keys are strings and all values are numbers. 
+
+
+#import <Foundation/Foundation.h>
+
+
+@interface FreqCount : NSObject
+- (NSDictionary *)check:(NSString *)s;
+@end
+
+
+@implementation FreqCount
+
+
+- (NSDictionary *)check:(NSString *)s {
+    NSMutableDictionary *d;
+    NSInteger i;
+    d = [[NSMutableDictionary alloc] init];
+
+
+    for (i = 0; i < [s length]; i++) {
+        NSString *k = [NSString stringWithFormat:@"%C", [s characterAtIndex:i]];
+        int v = [[d objectForKey:k] intValue];
+        [d setObject:[NSNumber numberWithInt:v + 1] forKey:k];
+    }
+    return d;
+}
+@end
+int main() {
+        FreqCount *obj = [[FreqCount alloc] init];
+        NSString *input = @"abbcccdddd";
+        
+        NSDictionary *res = [obj check:input];
+        NSLog(@"%@", res);
+    return 0;
+}
+
+
+
+
+2. Explain in a few words how NSSet is different from NSArray? Write a demo example where showing usage of NSSet? 
+
+
+NSArray stores elements in order and duplicate values also allowed.
+NSSet does not store duplicate values and order also not fixed. 
+
+
+
+
+
+
+int main() {
+        NSArray *arr;
+        NSSet *set;
+        arr = [NSArray arrayWithObjects:@"A", @"B", @"A", nil];
+        NSLog(@"NSArray : %@", arr);
+        set = [NSSet setWithObjects:@"A", @"B", @"A", nil];
+        NSLog(@"NSSet : %@", set);
+    return 0;
+}
+Here we can see arr can print all elements but set return only unique characters
+
+
+3. Explain in a few words as to what is the difference between == & isEqual? Is there any case when == should be used for objects?
+
+
+== checks both object pointing same memory or not.
+isEqual checks values same or not even if they are in different locations. 
+
+
+
+
+NSString *a = @"Hello";
+NSString *b = [NSString stringWithFormat:@"Hello"];
+if(a == b) {
+    NSLog(@"Same");
+}
+if([a isEqual:b]) {
+    NSLog(@"Value Same");
+}
+ Here ValueSame output we get
+
+
+4. Explain in your words what is dynamic runtime typing? What does the keyword “id” represent?
+
+
+In Objective-C datatype can decided at runtime and this feature is known as dynamic runtime typing.
+Id means it can store any type of object.  
+
+
+id data;
+data = @"Hello";
+NSLog(@"%@", data);
+
+
+data = @10;
+NSLog(@"%@", data);
+Here same variable is storing different types of objects.
+
+
+
+
+5. Explain in a few words what is NSObject 
+NSObject is parent class in Objective-C and there is no any superclass if NSObject.
+Many classes inherit from NSObject.
+It gives features like memory management and methods like isEqual
