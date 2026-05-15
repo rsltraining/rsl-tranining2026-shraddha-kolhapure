@@ -1,0 +1,121 @@
+﻿1. Explain in your own words what is reference counting. In which iOS version was ARC
+introduced and how does it help iOS manage memory; how was memory managed
+before the advent of ARC?
+
+
+Ans:
+Reference counting is used to track count of references that are pointing to objects or we can also say that objects taking ownership of another objects .
+When object is created it has given reference count if another object points to same object then the reference count get increased (also known as retail count +1)and if the reference is removed then count get decreased (release -1)
+
+
+Eg:
+@interface Person :NSObject 
+Int main(){
+        Person *p=[[Person alloc] init];
+        Person *p2=p1 
+Here both reference pointing to same object and count become 2.
+
+
+The ARC introduced from iOS 4.
+Arc helps IOS to manage memory by reducing efforts of developers of doing manual memory management 
+It acts as a garbage collector in objective c and it works using reference counting 
+If there is no reference point then ARC remove the space allocated for the object because it is of no use.
+
+
+The memory management before advent of arc is performed by keep tracking count of all objects and manually releasing memory using manual Reference counting by manually increase and decrease reference count if developer forgot to release memory them then the memory leak can get caused.
+
+
+
+
+2. Explain in your own words what are weak and strong qualifiers for properties and
+Variables.
+
+
+Weak qualifiers: 
+Weak qualifiers used to prevent the retain cycle.Weak qualifiers shows that object don’t want to take ownership of another object 
+This weak objects will be in memory until the strong objects keeps reference to it and until then the retail count does not get increased and it get destroyed if object no longer keep reference.
+In short it is like keep this as long as someone else points to it strongly
+
+
+Strong qualifiers:
+Strong qualifiers means that you want to own the object you are referencing and Whenever an object keeps strong reference to another object the retain count of that object is increased by 1
+All properties are ‘strong’ by default.
+Object remains alive until there is strong points to it.
+
+
+        
+3. Explain what does it mean to declare a property weak. What are the dangers of using a
+property / variable declared as weak?
+Declaring a property weak means that the property does not owns the object and its the reference count is not get increased its points until another object keep reference if no object keep reference then reference automatically become nil .
+
+
+Dangers of using a property/ variable declared as weak is that object can unexpectedly disappear if no strong reference exist and this can cause issue because it becomes nil so program can crash if we have not written logic to manage nil values.
+
+
+        
+4. Explain in your own words what is a retain cycle
+When two objects referring to each other and both are strong reference and due to this reason each others reference count will never get drop to zero causing memory wastage this is known as retain cycle.
+ Eg: 
+Employee (Strong) —--> Company
+Company (Strong) —-> Employee
+Here both objects strongly reference each other and because of this memory is never released.
+
+
+To solve the retail cycles one side should be declared as weak and other is strong 
+
+
+5. Write a code example which demonstrates a retain cycle. Add appropriate log
+statements in this demo example to show that object instances caught in the retain cycle
+are never deallocated.
+
+
+@interface Doctor: NSObject
+@property (nonatomic, strong) Patient *p;
+@end
+
+
+@interface Patient: NSObject
+@property (nonatomic, strong) Doctor *d;
+@end
+
+
+When we connect them:
+
+
+Doctor *abc = [[Doctor alloc] init];                // abc: 1
+Patient *xyz = [[Patient alloc] init];                     // xyz: 1
+
+
+abc.p= xyz;  // xyz: 2
+xyz.d = abc; // abc=2
+ If we set both to nil
+abc=nil xyz=nil 
+Both objects still have retain count 1 Neither deallocates and Memory get leaked 
+
+
+6. List down and explain in short some of the property qualifiers other than strong and
+weak. What does the ‘copy’ qualifier do?
+
+
+__unsafe_unretained : it behave similar to weak properties but don’t automatically set their value to nil if the referenced object is destroyed this is useful it is used in classes that does not supports weak reference.
+
+
+eg: __unsafe_unretained Person *p;
+Here if person object get deallocated p will still point to old memory instead of becoming nil.
+
+
+__autoreleasing: it is used for arguments passed by reference it means the returned object is placed in autorelease pool and will be released automatically but not immediately by arc 
+It manage temporary object safety without manual memory management
+
+
+
+
+Copy quantifies : it is alternative of strong quantifier and create a separate copy of the object instead of storing original reference and it is useful when we want unchanged value of object
+ Eg:
+ 
+NSMutableString *s= [NSMutableString stringWithString : @”Hello”]; 
+student.name=s;
+[s appendString: @” World”]; 
+
+
+ Here student .name does not point to sam eobject as str because of copy a separate object is created for student.name so original string changes to “Hello World” and the value of student.name will still be “Hello”
