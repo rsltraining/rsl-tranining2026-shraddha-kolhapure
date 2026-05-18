@@ -1,0 +1,172 @@
+﻿Assignment 1
+
+
+1.Read about Sets in Swift. Explain the main functions of Set.
+
+
+Set:
+Set in swift used to store different elements of same type in unordered way. In set elements appeared only ones.
+Main functions of Set:
+contains(_:) method to test whether a set contains a specific element
+“equal to” operator (==) to test whether two sets contain the same elements.
+union(_:) method to create a new set with the elements of a set and another set or sequence.
+intersection(_:) method to create a new set with only the elements common to a set and another set or sequence.
+insert(_:) method used to add element in given set.
+update(with:) method used to update particular element in given set.
+filter(_:) method to create a new set having elements that satisfy given condition.
+remove(_:)Removes the specified element from the set.
+removeFirst() Removes the first element of the set.
+min() Returns the minimum element in the sequence.
+max() Returns the maximum element in the sequence.
+sorted() Returns the elements of the sequence, sorted.is there 
+
+
+2.Read about Range operators in Swift. Give a couple of examples of usage.
+
+
+Range operators in swift are used to express series of values between two values
+Types:
+
+
+1.Closed Range Operator: 
+The closed range operator (a...b) is used to get a range that runs from a to b, and includes the values a and b. The value of a must not be greater than b.
+
+
+for index in 1...5 {
+    print("\(index) ") 
+}
+//it will print 1 2 3 4 5 in new lines.
+
+
+2.Half-Open Range
+A half-open range includes all the values from the lower bound to the upper bound. However,
+It ignores the upper bound
+It is declared using the ..< operator. For example,
+for numbers in 1..<5 {
+  print(numbers)
+}
+// output will be 1 2 3 4 in new lines(5 ge ignored)
+3.One-sided Range
+We can create a one-sided range using either of the ... or the ..< operator.
+A one-sided range contains elements up to infinite in one direction. For example,
+let range1 = ..<2 here range1 contains all elements from - infinity to 2
+
+
+
+
+
+
+3.Consider two Strings constant which can hold empty string (“”). In case both the string constants
+are empty strings then the function should print “none” otherwise the function should print the
+combination of both the string constants. For eg:
+let string1 = “”, string2 = “” then print “none”
+Another example:
+let string1 = “first string”, string2 = “and this is second string” the print “first string and this is
+second string”
+
+
+ans:
+Let string1=“”
+Let string2=“”
+print(string1.isEmpty && string2.isEmpty)?”None”:string1+” “+string2)
+
+
+4.Consider a constant which is an array of integers. Print elements of the array such that no value
+should be printed more than once. Eg:
+let elements = [6, 8, 1, 25, 65, 14 ,2, 1, 6, 6, 8]
+//Output 6, 8, 1, 25, 65, 14, 2
+
+
+ans:
+var items=[6, 8, 1, 25, 65, 14 ,2, 1, 6, 6, 8]
+var SingleRepeated = Array(Set(items))
+print(SingleRepeated)
+
+
+5.Consider a constant which is an array of integers and print all its odd numbers and even numbers
+separately. (Use switch statements) Eg:
+let elements = [6, 8, 1, 25, 65, 14 ,2]
+// Output should be as below:
+Odd numbers: 1, 25, 65
+Even numbers: 6, 8, 14, 2
+
+
+Ans:
+
+
+let items = [6, 8, 1, 25, 65, 14, 2, 1, 6, 6, 8]
+var even = [Int]()
+var odd = [Int]()
+
+
+for i in items {
+    switch i % 2 { 
+    case 0: 
+        even.append(i)
+    case 1, -1: 
+        odd.append(i)
+    default: 
+        break
+    } }
+print("even Numbers \(even)")
+print("odd Numbers \(odd)")
+
+
+6.Consider an integer array. Also consider three integers “x”, “y” and “z”. Value of “x” can only be 0
+and 1, and if the value of “x” is 0 then print the sum of elements in the array ranging from index
+“y” to “z”. Both elements at “y” and “z” will be included in the range.
+And if the value of x is 1 then insert the integer “z” at “y” index and print all elements of the array.
+For example:
+Let's consider the value of x is 0 and the value of “y” is 2 and the value of “z” is 4.
+let values = [2,4,1,5,1,8,6,4]
+Since the value of x is 0, print sum of elements from 2 to 4 (i.e [1, 5,1] ) which is 7
+But if the value of x is 1 (values of y and z are the same as above )
+print [2, 4, 4, 1, 5, 1, 8, 6, 4].
+
+
+var items = [6, 8, 1, 25, 65, 14, 2, 1, 6, 6, 8]
+let x = 0
+let y = 2
+let z = 3
+var sum = 0
+
+
+if x == 0 {
+    
+    for i in y...z {
+        sum += items[i] 
+    }
+    print("Sum: \(sum)")
+} else if x == 1 {
+    items.insert(z, at: y)
+    print(items)
+}
+
+
+
+
+7.Given an array of strings, create a dictionary by grouping them based on 1st letter
+for example: [Ranbir, Ranveer, Akshay, Varun, Abhishek, Navneet]
+Dictionary = ["R": ["Ranbir", "Ranveer"], "A":["Akshay", "Abhishek"], "N":["Navneet"], "V":["Varun"]]
+Also, print the count of strings for each key of the dictionary.
+
+
+
+
+let names = ["Ranbir", "Ranveer", "Akshay", "Varun", "Abhishek", "Navneet"]
+var groupedDictionary = [String: [String]]()
+
+
+for name in names {
+    let firstLetter = String(name.prefix(1))
+    
+    groupedDictionary[firstLetter, default: []].append(name)
+}
+
+
+print(groupedDictionary)
+
+
+for (key, list) in groupedDictionary {
+    print("\(key): \(list.count)")
+}
