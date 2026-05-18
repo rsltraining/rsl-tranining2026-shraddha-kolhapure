@@ -1,1 +1,1 @@
-# rsl-tranining2026-shraddha-kolhapure
+# rsl-training2026-shraddha-kolhapure
