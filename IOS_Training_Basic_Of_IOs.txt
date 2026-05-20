@@ -1,0 +1,156 @@
+﻿1. Investigate and write down in detail which life cycle methods of App delegate and scene delegate are invoked in following scenarios:
+a. App launch
+Ans:
+When app launches first time the methods invoked are:
+App Delegate methods:
+* didFinishLaunchingWithOptions
+This method is called first when app starts used for initial setup.
+
+
+Scene Delegate methods are:
+* willConnectToSession
+* sceneWillEnterForeground
+* sceneDidBecomeActive
+
+
+b. App background (Press iPhone home button)
+When home button is pressed methods getting invoked are:
+* sceneWillResignActive
+* sceneDidEnterBackground
+
+
+c. Phone locked (Lock Phone using simulator lock button)
+When phone is locked then method invoked are:
+* sceneWillResignActive
+* sceneDidEnterBackground
+
+
+
+
+d. Simulate memory warning (Simulator option -> Debug -> Simulate memory warning)(or
+shortcut: Shift+cmd+M)
+App delegates and scene delegates do not have specific memory warning methods because it is handled by UIViewController.
+
+
+e. App kill
+When app is removed the methods invoked are:
+App delegate method: 
+* applicationWillTerminate
+
+
+Scene Delegate method:
+* sceneDidDisconnect.
+
+
+
+
+2. Investigate and write down in detail which life cycle methods of UIViewController are invoked in following scenarios:
+a. App launch
+When app launch methods invoked are:
+* viewDidLoad
+* viewDidAppear
+* viewWillAppear
+
+
+b. App background (Press iPhone home button)
+When app goes background no UIViewController method is called but app becomes inactive.
+
+
+c. Phone locked (Lock Phone using simulator lock button)
+No UIViewController lifecycle method got called when phone is locked.
+
+
+d. Simulate memory warning (Simulator option -> Debug -> Simulate memory warning)(or
+shortcut: Shift+cmd+M)
+When systems memory is low method that get invoked is
+* didReceiveMemoryWarning
+
+
+e. App kill
+When app is removed method get called are:
+* viewWillDisappear
+* viewDidDisappear
+
+
+
+
+
+
+3. Override viewWillTransitionToSize: method is ViewController and verify what happens when screen is rotated. Write in detail what method parameter values you observed when rotating.
+
+
+The viewWillTransitionToSize method is called whenever the device screen rotates from portrait to landscape or landscape to portrait.
+This method gives updated width and height values of the screen using the CGSize parameter. During testing in simulator, it was observed that in portrait mode height value is greater than width, and after rotating to landscape mode width becomes greater than height.
+Code:
+
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    NSLog(@"Screen changed to: Width = %.0f, Height = %.0f", size.width, size.height);
+}
+
+
+Example:
+Portrait Mode
+Width = 393        Height = 852
+
+
+Landscape Mode
+Width = 852        Height = 393
+
+
+This shows that width and height values change based on screen orientation. 
+
+
+4. Try to map App states with App, Scene delegate and view controller life cycle methods. Based on your understanding note down which delegate/life cycle methods will fall under which App states (App foreground, background, suspended etc)
+
+
+An iOS application moves through different states during its lifecycle. Different AppDelegate, SceneDelegate and UIViewController methods are called based on app state changes.
+
+
+Not Running State:
+This is the state where app is not launched or app is fully closed.
+No lifecycle methods are called in this state.
+
+
+Active State
+In this state app is running in foreground and user can interact with it.
+AppDelegate Methods
+* didFinishLaunchingWithOptions
+
+
+SceneDelegate Methods
+* willConnectToSession:
+* sceneWillEnterForeground
+* sceneDidBecomeActive
+
+
+UIViewController Methods
+* viewDidLoad
+* viewWillAppear
+* viewDidAppear
+
+
+Inactive State
+This is a temporary state where app is visible but interaction is paused. Example: phone lock or incoming call.
+SceneDelegate Methods
+sceneWillResignActive
+
+
+Background State
+When home button is pressed or another app is opened, app moves to background.In this state app usually saves data.
+SceneDelegate Methods
+sceneDidEnterBackground
+
+
+Suspended State
+After remaining in background for some time, app enters suspended state.
+App stays in memory,No code execution happens and No direct lifecycle method is called
+
+
+Terminated State
+When app is fully closed or removed from recent apps.
+SceneDelegate Methods
+sceneDidDisconnect
+AppDelegate Methods
+applicationWillTerminate
