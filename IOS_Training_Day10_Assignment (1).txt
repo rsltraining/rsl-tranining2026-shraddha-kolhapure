@@ -1,0 +1,344 @@
+﻿1. Read in detail about UIView
+UIView is the basic building block of the iOS user interface in UIKit. Everything visible on the screen is directly or indirectly created using UIView. It is used to display content, handle user interactions, and manage layouts on the screen.
+UIView works like a container that can hold other UI elements such as labels, buttons, images, and text fields. It helps developers organize the screen properly by creating a view hierarchy. A parent view can contain multiple child views inside it.
+- Showing content on the screen
+- Handling touch actions
+- Taking care of child views
+- Supporting animations
+- Controlling what is visible and how things look
+UIView can be created in two ways:
+1.Programmatically using code
+2. Using Storyboard with drag and drop
+
+
+Example:
+UIView *myView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 200, 100)];
+myView.backgroundColor = [UIColor redColor];
+[self.view addSubview:myView];
+
+
+This code creates a red UIView and displays it on the screen.
+
+
+2. Read in detail about UIButton
+UIButton is a user interface component in UIKit used to perform actions when the user taps on it. It is a subclass of UIView, which means it also supports properties like frame, background color, hidden, and alpha.
+Buttons are commonly used in iOS applications for actions such as login, submit, register, next, save, and cancel. UIButton improves user interaction because it allows communication between the user and the application.
+
+
+UIButton works using the Target-Action mechanism. A method is connected to the button, and when the button is tapped, that method is executed automatically.
+Example
+
+
+UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+[button setTitle:@"Click" forState:UIControlStateNormal];
+[button addTarget:self
+           action:@selector(buttonClick)
+ forControlEvents:UIControlEventTouchUpInside];
+- (void)buttonClick {
+    NSLog(@"Button Clicked");   }
+This code creates a button and calls the buttonClick method when the user taps on the button.
+
+
+3. Create a new custom class which subclasses UIView (do this in both interface builder & programmatically). This class should contain the following elements:
+a. Add an image (you can show a static image here)
+b. Add a ‘Count’ label which shows a count.
+c. Add a ‘Increment’ button. Tapping on the button should increase the count shown by the label by 1.
+d. Tapping on the main view (i.e. outside the button / label / image) should decrease the count shown by
+the label by 1.
+e. The background color for the custom view should change as follows (Optional - animate this color
+change):
+i. Green if the count is positive
+ii. Red if the count is negative
+iii. White if the count is 0
+f. Add a switch which can enable / disable the ‘Increment’ button
+g. Add a slider which goes from 0 to 1. The opacity of the image should change as per this slider.
+4. Create an instance of this view programmatically and add it to your view controller
+
+
+
+
+Ans:
+
+
+ViewController.h
+#import <UIKit/UIKit.h>
+
+
+@interface ViewController : UIViewController <UIGestureRecognizerDelegate>
+
+
+@property (strong, nonatomic) UILabel *countLabel;
+@property (strong, nonatomic) UIButton *incrementButton;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UISwitch *toggleSwitch;
+@property (strong, nonatomic) UISlider *opacitySlider;
+
+
+@property (assign, nonatomic) NSInteger count;
+
+
+- (void)incrementButtonTapped:(UIButton *)sender;
+- (void)screenTapped:(UITapGestureRecognizer *)sender;
+- (void)switchValueChanged:(UISwitch *)sender;
+- (void)sliderValueChanged:(UISlider *)sender;
+
+
+@end
+
+
+
+
+ViewController.m
+
+
+#import "ViewController.h"
+
+
+@implementation ViewController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.count = 0;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 350, 40)];
+    self.countLabel.textAlignment = NSTextAlignmentCenter;
+    self.countLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightBold];
+    [self.view addSubview:self.countLabel];
+    
+    self.incrementButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.incrementButton.frame = CGRectMake(100, 150, 190, 50);
+    [self.incrementButton setTitle:@"Increment" forState:UIControlStateNormal];
+    self.incrementButton.titleLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightMedium];
+    self.incrementButton.backgroundColor = [UIColor systemBlueColor];
+    [self.incrementButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.incrementButton.layer.cornerRadius = 8;
+    [self.incrementButton addTarget:self action:@selector(incrementButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.incrementButton];
+    
+    self.toggleSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(170, 230, 0, 0)];
+    [self.toggleSwitch setOn:YES animated:NO];
+    [self.toggleSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.toggleSwitch];
+    
+    self.opacitySlider = [[UISlider alloc] initWithFrame:CGRectMake(50, 290, 290, 40)];
+    self.opacitySlider.minimumValue = 0.0;
+    self.opacitySlider.maximumValue = 1.0;
+    self.opacitySlider.value = 1.0;
+    [self.opacitySlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.opacitySlider];
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 380, 200, 200)];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.clipsToBounds = YES;
+    [self.view addSubview:self.imageView];
+    
+    NSURL *imageURL = [NSURL URLWithString:@"https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        if (imageData) {
+            UIImage *onlineImage = [UIImage imageWithData:imageData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = onlineImage;
+            });
+        }
+    });
+    
+    UITapGestureRecognizer *screenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
+    screenTap.delegate = self;
+    screenTap.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:screenTap];
+    
+    [self updateUI];
+}
+
+
+- (void)sliderValueChanged:(UISlider *)sender {
+    self.imageView.alpha = sender.value;
+}
+
+
+- (void)switchValueChanged:(UISwitch *)sender {
+    self.incrementButton.enabled = sender.isOn;
+    self.incrementButton.alpha = sender.isOn ? 1.0 : 0.5;
+}
+
+
+- (void)incrementButtonTapped:(UIButton *)sender {
+    self.count++;
+    [self updateUI];
+}
+
+
+- (void)screenTapped:(UITapGestureRecognizer *)sender {
+    self.count--;
+    [self updateUI];
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (!self.toggleSwitch.isOn) {
+        return NO;
+    }
+    if ([touch.view isDescendantOfView:self.incrementButton]) {
+        return NO;
+    }
+    if ([touch.view isKindOfClass:[UISwitch class]]) {
+        return NO;
+    }
+    if ([touch.view isKindOfClass:[UISlider class]]) {
+        return NO;
+    }
+    return YES;
+}
+
+
+- (void)updateUI {
+    self.countLabel.text = [NSString stringWithFormat:@"Count : %ld", (long)self.count];
+    
+    if (self.count == 0) {
+        self.view.backgroundColor = [UIColor whiteColor];
+    } else if (self.count >= 1) {
+        self.view.backgroundColor = [UIColor systemGreenColor];
+    } else {
+        self.view.backgroundColor = [UIColor systemRedColor];
+    }
+}
+
+
+@end
+
+
+
+
+Assignment 2:
+Build a simple but fun game called Bull's Eye.
+Step 1: Show a randomly generated number(between 1 to 100)
+Step 2: User tries to hit this value on slider
+Step 3: Calculate a score based on the hitting value of the slider and display the total score.
+Step 4: Provide functionality for keeping track of number of rounds played and to reset it as well (startover)
+Step 5: Display score of each round on “info” button click.
+ViewController.h
+#import <UIKit/UIKit.h>
+@interface ViewController : UIViewController
+@end
+
+
+
+
+ViewController.m
+#import "ViewController.h"
+
+
+@interface ViewController ()
+@property UILabel *targetLabel;
+@property UILabel *scoreLabel;
+@property UILabel *roundLabel;
+@property UISlider *slider;
+@property UIButton *hitButton;
+@property UIButton *startOverButton;
+@property UIButton *infoButton;
+@property int targetValue;
+@property int totalScore;
+@property int round;
+@property NSMutableArray *roundScores;
+
+
+@end
+
+
+@implementation ViewController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.roundScores = [[NSMutableArray alloc] init];
+    self.totalScore = 0;
+    self.round = 0;
+    self.targetLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 100, 250, 40)];
+    [self.view addSubview:self.targetLabel];
+    self.scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 150, 250, 40)];
+    [self.view addSubview:self.scoreLabel];
+    self.roundLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 200, 250, 40)];
+    [self.view addSubview:self.roundLabel];
+    self.slider = [[UISlider alloc] initWithFrame:CGRectMake(40, 280, 300, 40)];
+    self.slider.minimumValue = 1;
+    self.slider.maximumValue = 100;
+    [self.view addSubview:self.slider];
+    self.hitButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.hitButton.frame = CGRectMake(120, 350, 120, 40);
+    [self.hitButton setTitle:@"Hit Me" forState:UIControlStateNormal];
+    [self.hitButton addTarget:self action:@selector(hitMeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.hitButton];
+    self.startOverButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.startOverButton.frame = CGRectMake(40, 430, 120, 40);
+
+
+    [self.startOverButton setTitle:@"Start Over" forState:UIControlStateNormal];
+    [self.startOverButton addTarget:self action:@selector(startOverButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.startOverButton];
+    self.infoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.infoButton.frame = CGRectMake(220, 430, 120, 40);
+    [self.infoButton setTitle:@"Info" forState:UIControlStateNormal];
+    [self.infoButton addTarget:self action:@selector(infoButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.infoButton];
+    [self startNewRound];
+}
+
+
+- (void)startNewRound {
+    self.targetValue = arc4random_uniform(100) + 1;
+    self.targetLabel.text = [NSString stringWithFormat:@"Target : %d", self.targetValue];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score : %d", self.totalScore];
+    self.roundLabel.text = [NSString stringWithFormat:@"Round : %d", self.round];
+}
+
+
+- (void)hitMeButtonTapped {
+
+
+    int sliderValue = (int)self.slider.value;
+    int difference = abs(self.targetValue - sliderValue);
+    int points = 100 - difference;
+    self.totalScore += points;
+    self.round++;
+    NSString *roundText = [NSString stringWithFormat:@"Round %d : %d points", self.round, points];
+    [self.roundScores addObject:roundText];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Result" message:roundText preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+    [self startNewRound];
+}
+
+
+- (void)startOverButtonTapped {
+    self.totalScore = 0;
+    self.round = 0;
+    [self.roundScores removeAllObjects];
+
+
+    [self startNewRound];
+}
+
+
+- (void)infoButtonTapped {
+
+
+    NSString *message = [self.roundScores componentsJoinedByString:@"\n"];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Round Scores" message:message preferredStyle:UIAlertControllerStyleAlert];
+
+
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+@end
