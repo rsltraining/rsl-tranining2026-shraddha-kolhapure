@@ -17,11 +17,11 @@ options:(UISceneConnectionOptions *)connectionOptions {
 
     
     // Uncomment this for Custom UIView Assignment
-    self.window.rootViewController = [[ViewController alloc] init];
+   self.window.rootViewController = [[ViewController alloc] init];
 
     
     // Uncomment this for Bull's Eye Game
-     //self.window.rootViewController = [[GameViewController alloc] init];
+    // self.window.rootViewController = [[GameViewController alloc] init];
 
     
     [self.window makeKeyAndVisible];
