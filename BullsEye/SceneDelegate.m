@@ -1,0 +1,15 @@
+#import "SceneDelegate.h"
+#import "GameViewController.h"
+
+@interface SceneDelegate ()
+@end
+
+@implementation SceneDelegate
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+    self.window.rootViewController = [[GameViewController alloc] init];
+    [self.window makeKeyAndVisible];
+}
+
+@end
