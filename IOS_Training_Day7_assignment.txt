@@ -1,0 +1,104 @@
+﻿1. Limitations and problems with category?
+Category is used to add extra methods to an existing class without creating a new class but categories have some limitations i.e
+1. We cannot add instance variables in category.
+Means we cannot create new data members inside category
+2. Categories should not override existing methods.
+If two categories have same method name then it may create confusion at runtime.
+3. Categories are mainly used for adding extra functionality only.
+4. At runtime, Objective-C cannot identify whether method came from original class or category.
+// Person.h        
+@interface Person : NSObject
+- (void)showName;      @end 
+// Person.m
+@implementation Person
+- (void)showName {
+    NSLog(@"Original method");
+}  @end
+Now if i want to add Extra method for age we can add that using category as below
+// Person+Extra.h
+@interface Person (Extra)
+- (void)showAge;  @end
+// Person+Extra.m
+@implementation Person (Extra)
+- (void)showAge {
+    NSLog(@"Age is 22");
+} @end
+2. Category VS Inheritance
+Category adds extra methods to existing class but inheritance creates new child class from parent class.
+In category we cannot add instance variables but in child class we can add variables.
+Category is mainly used to extend functionality of existing class while inheritance is used for code reusability and creating relationship between classes.
+Category should not override existing methods from base class because it may create runtime issues, but in inheritance child class can override parent class methods.
+
+
+3. Category VS Extension
+Category can add only methods but extension can add methods and properties.
+We can create categories in separate file but extension is generally created in same .m file.
+Category is mostly used to add public functionality to existing class while extension is used for private methods and private properties.
+In category we cannot add instance variables but in extension we can create private properties.
+4. Declare a block which takes 2 parameter (strings) which return the concatenated string using
+the 2 parameters.
+
+
+#import <Foundation/Foundation.h>
+int main() {
+    NSString* (^concatString)(NSString *, NSString *);
+    concatString = ^NSString* (NSString *s1, NSString *s2) {
+        return [s1 stringByAppendingString:s2];
+    };
+    NSString *result = concatString(@"Hello ", @"World");
+    NSLog(@"%@", result);
+    return 0;
+}
+
+
+5. Declare two blocks one for addition of two integers(additionBlock) and one for subtraction of two values(substractionBlock).
+
+
+#import <Foundation/Foundation.h>
+int main() {
+    NSInteger (^additionBlock)(NSInteger, NSInteger);
+    additionBlock = ^NSInteger(NSInteger a, NSInteger b) {
+        return a + b;
+    };
+    NSLog(@"Addition = %ld", (long)additionBlock(10, 5));
+
+
+ NSInteger (^subtractionBlock)(NSInteger, NSInteger);
+    subtractionBlock = ^NSInteger(NSInteger a, NSInteger b) {
+       return a - b;
+    };
+    NSLog(@"Subtraction = %ld", (long)subtractionBlock(10, 5));
+    return 0;
+}
+6. Declare another block for printing the values (printingBlock). Call the block in the following manner. Addition will call subtraction and subtraction will call printingBlock.
+
+
+#import <Foundation/Foundation.h>
+int main() {
+    // Printing Block
+    void (^printingBlock)(NSInteger);
+    printingBlock = ^(NSInteger result) {
+        NSLog(@"Final Result = %ld", (long)result);
+    };
+
+
+    // Subtraction Block
+    NSInteger (^subtractionBlock)(NSInteger, NSInteger);
+    subtractionBlock = ^NSInteger(NSInteger a, NSInteger b) {
+        NSInteger sub = a - b;
+        printingBlock(sub);
+        return sub;
+    };
+
+
+    // Addition Block
+    NSInteger (^additionBlock)(NSInteger, NSInteger);
+    additionBlock = ^NSInteger(NSInteger a, NSInteger b) {
+        NSInteger add = a + b;
+        NSLog(@"Addition Result = %ld", (long)add);
+        subtractionBlock(add, 5);
+        return add;
+    };
+additionBlock(10, 20);
+    return 0;
+}
