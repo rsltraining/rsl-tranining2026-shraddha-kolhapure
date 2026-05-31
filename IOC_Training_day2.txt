@@ -1,0 +1,195 @@
+﻿Q1.Read about difference between struct and class and explain in few lines
+Difference between Struct and class is 
+
+
+1.Syntax of Struct defined using struct keyword and Class is defined using class keyword.
+
+
+2.Classes use constructors with init  and structs automatically get memberwise initializers.
+
+
+struct Person {
+    var name: String
+}
+let p = Person(name: "Shraddha")
+Here Swift automatically provides initializer for struct.
+
+
+
+
+3.Struct is a value type  which means when we copy a struct object a new separate copy is created class is a reference type which means when we copy a class object both variables point to the same memory location.
+Explanation:
+
+
+struct Student {
+    var name = "Shraddha"
+}
+var s1 = Student()
+var s2 = s1
+s2.name = "sayli"
+print(s1.name)
+here s1.name will still be "Shraddha" because struct creates a separate copy and changes in one object that does not affect the other object
+
+
+class Student {
+    var name = "Shraddha"
+}
+var s1 = Student()
+var s2 = s1
+s2.name = “Sayli”
+print(s1.name)
+here s1.name will also become “Sayli”  because both variables are referring to the same object.
+
+
+4.Class supports inheritance but struct does not support inheritance
+
+
+
+
+Q2.Write a function that takes an Integer array as an input and returns sum of all even numbers and sum of all Odd numbers in it.
+
+
+func SumOfEvenOdd(array:[Int]) -> (Int,Int)
+{
+var evens=0 ; var odds=0
+for elm in array{
+         elm%2==0 ? (evens+=elm) : (odds+=elm)
+}
+return (evens,odds)
+}
+
+
+ let a=[1, 2, 2, 3, 4, 4, 5, 1]
+ let result=SumOfEvenOdd(array : a)
+ print("sum of even number \(result.0)")
+ print("sum of odd number \(result.1)")
+
+
+
+
+
+
+Q4. Write a function that can take precisely 0, 1 or 2 string parameters and returns the function parameters
+concatenated as String. if no parameter is passed return “none”.
+
+
+
+
+func concatenate(_ str1: String? = nil, _ str2: String? = nil) -> String{
+    if str1 == nil && str2 == nil {
+        return "none"
+    }  return (str1 ?? "") + (str2 ?? "")
+}
+
+
+
+
+5.Write an extended function of Array named “moveElementToBackFromIndex(:)” which will move the element
+at given index to the end of the array and return the array. For example
+let arr = [5,2,3,4]
+arr.moveElementToBackFromIndex(1)) // [5, 3, 4, 2]
+
+
+Ans:
+func moveElementToBackFromIndex(array: inout [Int], idx: Int) {
+    if (idx<array.count && idx>=0) {
+        let value = array[idx]
+        for i in idx ..< array.count - 1{
+            array[i] = array[i + 1]
+        }
+        array[array.count - 1] = value
+    } else {
+        print("input is not correct")
+    }
+}
+
+
+var a = [1, 2, 3, 4, 5]
+moveElementToBackFromIndex(array: &a, idx: 2)
+print(a)
+                        OR
+func moveElementToBackFromIndex(array: inout [Int], idx: Int) {
+    let value = array[idx]
+    array.remove(at: idx) 
+    array.append(value)
+}
+
+
+Q6. Read about access levels in Swift : public, open, internal, fileprivate, private and explain in few lines with examples
+
+
+access controls are used to set the accessibility and visibility of classes structs, enums, properties, methods.
+Eg:
+class ATM{
+  public func ViewBalance() {...}
+  private func UpdateDetails() {...}
+}
+Here the public method are accessible to all but not private.
+
+
+1.public Access Control : declarations are accessible from everywhere 
+example:
+  public var age: Int = 18
+  
+2.private Access Control
+When we declare a type member as private then it can only be accessed within the same class or struct
+  var age: Int = 18
+
+
+3.fileprivate Access Control
+When we declare a type member as fileprivate, then it can only be accessed within the defined source file. It cant be accessed from another Swift file.
+
+
+4.internal Access Control
+When we declare a type as internal it can be accessed only within the same module not outside of it. Module is like collection of classes created for group work for single unit.
+
+
+5.Open access Control
+Open access control level is accessible, subclassed, and overridden from both within same module and by external modules.
+
+
+7. Create a generic class “Queue” in which there will be a function which can add an element of generic type in an array and a function which will return the size of the array.
+For example:
+let x = Queue<String>
+x.add(“Example”)
+let y = Queue<Int>
+x.add(22)
+
+
+
+
+class Queue<T> {
+    var elements: [T] = []
+    func add(_ value: T) {
+        elements.append(value)
+    }
+    func size() -> Int {
+        return elements.count
+    }
+}
+
+
+Q3.Write a function called “sum” which can take 0 or more parameters of input of any type. The function will return the sum of the passed parameters as a String(i.e return type is String) following are the rules:
+a. If a parameter is an empty string or an Integer equal to zero, then add -10 to the result.
+b. If a parameter is a string representing a positive number (eg: “1”, not “-10”) then add that number to
+the result.
+c. If a parameter is an Integer, add it to the result.
+d. In any other case do not add to the result.
+Eg :
+let result = sum(“10”, 10.8, 10, “a number”, -2, “”) //the result will be “8”
+let result = sum(“-6”, “5”, 2) // the result will be “7”
+
+
+func sum(_ val: Any...) -> String {
+    var res = 0
+    for i in val {
+        if let str = i as? String 
+            if str.isEmpty {
+                res += -10
+            }
+            else if let num = Int(str), num > 0 {
+                res += num
+            }}
+        else if let num = i as? Int {
+            num == 0 ? (res += -10) : (res+= num)
+        } }  return "\(res" }
