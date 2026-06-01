@@ -1,0 +1,91 @@
+﻿Read following topics of UINavigationController:
+a. Read some important properties of UINavigationController - rootViewController,
+viewControllers
+->
+UINavigationController: it is a UIKit class that manages a stack-based navigation interface, which allows users to navigate through a hierarchy of view controllers. It is a subclass of UIViewController and provides a navigation bar and optional toolbar for navigating between screens.
+Properties:
+viewControllers->        The stack of view controllers managed by the navigation controller.
+topViewController->           The currently visible view controller (top of the stack).
+visibleViewController->         The currently visible view controller, including presented controllers.
+navigationBar->         The navigation bar displayed at the top.
+
+
+rootViewController:
+rootViewController : it is very first screen manager that loads when app opens. It acts as the parent that holds all other views. It tells the device's window exactly what to display on the screen. Every app window can only have one root view controller at a time.
+
+
+viewControllers:  The View Controller is the parent of all the views present on a storyboard. Each UIKit application has at least one ViewController. It is fundamental building block of an iOS app's user interface managing a single screen of content and acting as the bridge between your app's data and the visual elements users see
+
+
+b. Read about important classes - UINavigationBar, UIBarButtonItem
+UINavigationBar: it is the top bar that manages navigation history, titles, and bar buttons across app.Normally it contains Screen title,Back button,Left bar button,Right bar button
+Example:
+If we open:
+Home → Details → Profile
+navigation bar helps us go back from Profile to Details or Home
+
+
+UIBarButtonItem
+
+
+UIBarButtonItem is a button placed inside Navigation Bar or Toolbar.
+
+
+It is mostly added on left side or right side of navigation bar.
+
+
+Examples:
+
+
+Back, Add , Save, Edit,Done
+
+
+
+
+3. Read following topics of UINavigationBar:
+a. Important properties - translucent, tintColor, barTintColor
+b. How to set background image, title, left bar button, right bar button
+c. How to customize the appearance of the navigation bar - change title font, color,
+background color etc.
+
+
+a) Important properties
+
+
+translucent
+Used to make navigation bar transparent or solid.
+
+
+tintColor
+Changes color of navigation bar buttons like back button or right button.
+
+
+barTintColor
+Changes background color of navigation bar.
+
+
+b) Set background image, title, left bar button, right bar button
+
+
+We can customize navigation bar by setting title and buttons.
+
+
+self.title → sets screen title
+leftBarButtonItem → adds button on left side
+rightBarButtonItem → adds button on right side
+setBackgroundImage → adds image to navigation bar background
+
+
+This helps make app navigation better and cleaner.
+
+
+c) Customize appearance
+
+
+Navigation bar appearance can be changed using:
+
+
+background color
+title color
+title font size
+bar button color
