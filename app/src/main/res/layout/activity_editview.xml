@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="50dp"
+    android:background="#FFFFFF">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Go Back Home"
+        android:src="?attr/homeAsUpIndicator"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        android:inputType="textPersonName"
+        android:paddingBottom="30dp"
+        android:hint="Normal Text Style "
+        android:textColor="@color/black"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:inputType="phone"
+        android:paddingBottom="30dp"
+        android:hint="Bold Text Style (Phone Number) "
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50px"
+        android:textStyle="italic"
+        android:paddingBottom="30dp"
+        android:inputType="textPassword"
+        android:hint="Italic Text Style (Password Hidden)" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:textSize="10mm"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:paddingBottom="35dp"
+        android:inputType="textEmailAddress"
+        android:hint="Enter email" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:paddingBottom="30dp"
+        android:inputType="date"
+        android:hint="Enter Date" />
+
+</LinearLayout>

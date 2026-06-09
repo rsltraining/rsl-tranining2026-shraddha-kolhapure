@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Go Back Home"
+            android:src="?attr/homeAsUpIndicator"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginBottom="16dp"/>
+        <TextView
+            android:layout_width="200px"
+            android:layout_height="80px"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="15dp"
+            android:background="#FFCDD2"
+            android:text="Size in px" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:background="#C8E6C9"
+            android:text="Size in dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24px"
+            android:layout_marginBottom="8dp"
+            android:text="Text Size 24px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:text="Text Size 16sp" />
+
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:background="#BBDEFB">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFF9C4"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="gravity: center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:background="#BBDEFB">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFE0B2"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="bottom|end"
+                android:text="layout_gravity: bottom|end" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E1BEE7"
+            android:padding="30px"
+            android:layout_marginBottom="8dp"
+            android:text="Padding 30px" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F5DD5D"
+            android:paddingStart="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="Padding Start Only" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFE0B2"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="8dp"
+            android:text="Padding Top &amp; Bottom Only" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Bold Text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Italic Text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:text="Bold and Italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+            android:background="#B2DFDB"
+            android:text="Tqfugrfuqrfigwgvvhvqwefh1du2jjfqfugrfuqrfigwgvv1uqrfigwg1f3989ok5gvvhvqwefh" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:layout_marginBottom="5dp"
+            android:background="#B2DFDB"
+            android:text="qfugrfuqrfigwgvvhvqwefh1du2jjfqfugrfuqrfigwgvv1uqrfigwg1f3989ok5gvvhvqwefh fqfugrfuqrfigwgvvhvqwefh fqfugrfuqrfigwgvvhvqwefh fqfugrfuqrfigwgvvhvqwefh fqfugrfuqrfigwgvvhvqwefh f." />
+
+    </LinearLayout>
+</ScrollView>
