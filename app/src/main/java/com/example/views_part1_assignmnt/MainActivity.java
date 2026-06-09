@@ -29,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnButtonView).setOnClickListener(v -> startActivity(new Intent(this, ButtonActivity.class)));
 
         findViewById(R.id.btnImgView).setOnClickListener(v -> startActivity(new Intent(this, ImageViewActivity.class)));
-        System.out.println("PR test");
+        
     }
 }
