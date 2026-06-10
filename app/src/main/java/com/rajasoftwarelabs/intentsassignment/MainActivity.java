@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO (4): Create and fire an implicit intent to open the email app.
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // Ensures only email applications handle this
+        intent.setData(Uri.parse("mailto:")); 
         intent.putExtra(Intent.EXTRA_EMAIL, EMAIL_ADDRESS);
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, body);
