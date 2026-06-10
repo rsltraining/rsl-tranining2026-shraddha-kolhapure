@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imgInstitute"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/institute_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtInstitute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raja Software Labs"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/imgInstitute"
+        app:layout_constraintEnd_toEndOf="@id/imgInstitute"
+        app:layout_constraintStart_toStartOf="@id/imgInstitute"
+        app:layout_constraintTop_toTopOf="@id/imgInstitute" />
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/stu3"
+        app:layout_constraintEnd_toStartOf="@id/img2"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgInstitute" />
+
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/stu2"
+        app:layout_constraintEnd_toStartOf="@id/img3"
+        app:layout_constraintStart_toEndOf="@id/img1"
+        app:layout_constraintTop_toTopOf="@id/img1" />
+
+    <ImageView
+        android:id="@+id/img3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img2"
+        app:layout_constraintTop_toTopOf="@id/img1" />
+
+    <TextView
+        android:id="@+id/name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="1. Shraddha"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img1" />
+
+    <TextView
+        android:id="@+id/name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2. Jayant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name1" />
+
+    <TextView
+        android:id="@+id/name3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3. Riya"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name2" />
+
+    <TextView
+        android:id="@+id/txtSubjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Subjects Mastered"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name3" />
+
+    <TextView
+        android:id="@+id/subjectList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:text="1. Java&#10;2. Android&#10;3. Kotlin&#10;4. SQL&#10;5. Spring Boot&#10;6. Git&#10;7. HTML&#10;8. CSS&#10;9. JavaScript&#10;10. REST API"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSubjects" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
