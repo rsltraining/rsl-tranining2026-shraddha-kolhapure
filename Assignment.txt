@@ -1,0 +1,31 @@
+5. Why are ivars used inside getters / setters and not the dot (.) operator? What will happen if the dot (.) operator is used inside the getters / setters?
+ans:
+
+Inside getter and setter methods mostly ivars are used because dot operator again calls the setter or getter method internally If we use self.name inside setter method then setter method keeps calling itself again and again. Because of this infinite recursion happens and application may crash.
+So inside getter and setter methods we directly use ivars like name or _name.
+ Eg:
+
+-(void)setName:(NSString *)n {
+name=n;	}
+Wrong way:
+-(void)setName:(NSString *)n {
+self.name=n;	}
+Here self.name=n again calls setter method and creates loop.
+
+6. Create method which will update employee’s organization, Here Organization is read only for the outside world.
+ans: 
+Here organization property is readonly so outside class cannot change it directly
+But inside class we can create one method which will updates the organization. This helps in data safety and proper control of object. 
+@property(readonly) Organization *org;
+-(void)changeOrg:(Organization *)o
+{
+org=o;
+}
+
+
+7. Read about atomic / nonatomic property attributes.
+ans: 
+atomic means property is thread safe. If many threads access same property at same time then atomic helps to avoid problems. But atomic is little slow because extra checking happens internally.
+Eg @property(atomic) NSString *name;
+nonatomic is faster because it does not provide thread safety. Mostly developers use nonatomic in iOS apps because it gives better performance.
+@property(nonatomic) NSString *city; 
